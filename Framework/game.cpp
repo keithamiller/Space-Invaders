@@ -10,6 +10,7 @@
 #include "sprite.h"
 #include "entity.h"
 #include <algorithm>
+#include "fmod.hpp"
 
 // Library includes:
 #include <cassert>
@@ -69,6 +70,8 @@ Game::~Game()
 bool 
 Game::Initialise()
 {
+
+
 	const int width = 800;
 	const int height = 600;
 
