@@ -75,8 +75,6 @@ InputHandler::ProcessInput(Game& game)
 		else if (e.type == SDL_JOYBUTTONDOWN)
 		{
 			char button[80];
-			sprintf(button, "%d", e.jbutton.button);
-			LogManager::GetInstance().Log(button);
 			// W03.3: Tell the game to fire a player bullet...
 			switch (e.jbutton.button){
 			case 0:

@@ -188,32 +188,57 @@ Game::Process(float deltaTime)
 	// W03.3: Check for bullet vs alien enemy collisions...
 	bulletIter = bulletContainer.begin();
 	enemyIter = enemyContainer.begin();
-	while (enemyIter != enemyContainer.end() || enemyContainer.size() == 0)
+	// W03.3: For each bullet
+	// W03.3: For each alien enemy
+	// W03.3: Check collision between two entities.
+	while (bulletIter != bulletContainer.end())
 	{
-		while (bulletIter != bulletContainer.end())
+		
+		while (enemyIter != enemyContainer.end())
 		{
-			Entity* currentBullet = (*bulletIter);
 			if ((*bulletIter)->IsCollidingWith(*enemyIter))
 			{
 				LogManager::GetInstance().Log("Has Collided");
 				(*bulletIter)->SetDead(true);
 				(*enemyIter)->SetDead(true);
 			}
-			bulletIter++;
+			enemyIter++;
 		}
-		enemyIter++;
+		bulletIter++;
 	}
 
 	
-	// W03.3: For each bullet
-	// W03.3: For each alien enemy
-	// W03.3: Check collision between two entities.
+
 	// W03.3: If collided, destory both and spawn explosion.
+	
 
 	// W03.3: Remove any dead bullets from the container...
-
+	bulletIter = bulletContainer.begin();
+	while (bulletIter != bulletContainer.end())
+	{
+		if ((*bulletIter)->GetPositionY() < 0)
+		{
+			(*bulletIter)->SetDead(true);
+		}
+		if ((*bulletIter)->IsDead())
+		{
+			bulletIter = bulletContainer.erase(bulletIter);
+		} else
+		{
+			bulletIter++;
+		}
+	}
 	// W03.3: Remove any dead enemy aliens from the container...
-
+	enemyIter = enemyContainer.begin();
+	while (enemyIter != enemyContainer.end())
+	{
+		if ((*enemyIter)->IsDead()){
+			enemyIter = enemyContainer.erase(enemyIter);
+		}
+		else{
+			enemyIter++;
+		}
+	}
 	// W03.3: Remove any dead explosions from the container...
 }
 
